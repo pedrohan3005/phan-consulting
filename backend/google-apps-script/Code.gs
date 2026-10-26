@@ -17,6 +17,19 @@ var HEADERS = [
   "Google click ID",
 ];
 
+function myFunction() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  if (!spreadsheet) {
+    throw new Error("Abra o Apps Script a partir da planilha que recebera os leads.");
+  }
+
+  var sheet = spreadsheet.getSheetByName("Leads") || spreadsheet.insertSheet("Leads");
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(HEADERS);
+  }
+  sheet.setFrozenRows(1);
+}
+
 function doPost(event) {
   var data = event && event.parameter ? event.parameter : {};
   var requestToken = cleanText(data.request_token, 100);

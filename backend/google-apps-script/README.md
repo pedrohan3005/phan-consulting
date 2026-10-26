@@ -9,10 +9,13 @@ na URL da pagina.
 1. Crie uma planilha no Google Sheets e mantenha o acesso restrito a equipe.
 2. Na planilha, abra **Extensoes > Apps Script**.
 3. Substitua o conteudo de `Code.gs` pelo arquivo deste diretorio e salve.
-4. Clique em **Implantar > Nova implantacao** e escolha **App da Web**.
-5. Configure **Executar como: eu** e **Quem pode acessar: qualquer pessoa**.
-6. Implante, autorize o acesso solicitado e copie a URL terminada em `/exec`.
-7. Configure essa URL como `LEAD_ENDPOINT` no JavaScript de `agendamento.html`.
+4. No editor, selecione `myFunction` e clique em **Executar** para criar a aba
+	`Leads` e autorizar o acesso a planilha. `doPost` nao deve ser executada
+	manualmente; ela e chamada pelo formulario.
+5. Clique em **Implantar > Nova implantacao** e escolha **App da Web**.
+6. Configure **Executar como: eu** e **Quem pode acessar: qualquer pessoa**.
+7. Implante e copie a URL terminada em `/exec`.
+8. Configure essa URL como `LEAD_ENDPOINT` no JavaScript de `agendamento.html`.
 
 O endpoint e publico para permitir envios pelo GitHub Pages. A planilha deve
 continuar privada. O script valida campos obrigatorios, exige consentimento,
