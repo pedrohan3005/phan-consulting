@@ -224,7 +224,11 @@
 
 <script>
   (() => {
-    const bookingUrl = 'https://pedrohan3005.github.io/phan-consulting/agendamento.html';
+    const bookingUrl = 'https://pedrohan3005.github.io/phan-consulting/agendamento.html#diagnostico';
+    const serviceUrl = 'https://pedrohan3005.github.io/phan-consulting/consultoria.html#pilares';
+    document.querySelectorAll('header nav a').forEach((link, index) => {
+      link.href = index === 3 ? bookingUrl : serviceUrl;
+    });
     const servicePages = [
       'phan_assessoria_consultoria_comercial/code.html',
       'phan_consultoria_de_gest_o_opera_es/code.html',
@@ -271,4 +275,5 @@
     }
   })();
 </script>
+<script src="site-navigation.js" defer></script>
 </body></html>
