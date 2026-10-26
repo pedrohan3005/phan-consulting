@@ -23,7 +23,17 @@ function myFunction() {
     throw new Error("Abra o Apps Script a partir da planilha que recebera os leads.");
   }
 
-  var sheet = spreadsheet.getSheetByName("Leads") || spreadsheet.insertSheet("Leads");
+  var sheet = spreadsheet.getSheetByName("Leads");
+  if (!sheet) {
+    var activeSheet = spreadsheet.getActiveSheet();
+    if (activeSheet && activeSheet.getLastRow() === 0) {
+      activeSheet.setName("Leads");
+      sheet = activeSheet;
+    } else {
+      sheet = spreadsheet.insertSheet("Leads");
+    }
+  }
+
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
   }
