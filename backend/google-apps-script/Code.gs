@@ -1,4 +1,4 @@
-const HEADERS = [
+var HEADERS = [
   "Recebido em",
   "Nome",
   "E-mail",
@@ -18,14 +18,14 @@ const HEADERS = [
 ];
 
 function doPost(event) {
-  const data = event && event.parameter ? event.parameter : {};
-  const requestToken = cleanText(data.request_token, 100);
+  var data = event && event.parameter ? event.parameter : {};
+  var requestToken = cleanText(data.request_token, 100);
 
   if (String(data.website || "").trim()) {
     return htmlResponse(true, requestToken);
   }
 
-  const lead = {
+  var lead = {
     name: cleanText(data.name, 120),
     email: cleanText(data.email, 254).toLowerCase(),
     phone: cleanText(data.phone, 40),
@@ -55,23 +55,23 @@ function doPost(event) {
     return htmlResponse(false, "", "invalid_request");
   }
 
-  const lock = LockService.getScriptLock();
+  var lock = LockService.getScriptLock();
   lock.waitLock(10000);
 
   try {
-    const cache = CacheService.getScriptCache();
-    const digest = Utilities.computeDigest(
+    var cache = CacheService.getScriptCache();
+    var digest = Utilities.computeDigest(
       Utilities.DigestAlgorithm.SHA_256,
       lead.email
     );
-    const cacheKey = "lead:" + Utilities.base64EncodeWebSafe(digest);
+    var cacheKey = "lead:" + Utilities.base64EncodeWebSafe(digest);
 
     if (cache.get(cacheKey)) {
       return htmlResponse(false, requestToken, "duplicate_submission");
     }
 
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = spreadsheet.getSheetByName("Leads") || spreadsheet.insertSheet("Leads");
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = spreadsheet.getSheetByName("Leads") || spreadsheet.insertSheet("Leads");
 
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(HEADERS);
@@ -112,12 +112,12 @@ function cleanText(value, maxLength) {
 }
 
 function safeCell(value) {
-  const text = String(value || "");
+  var text = String(value || "");
   return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 
 function htmlResponse(ok, requestToken, error) {
-  const message = JSON.stringify({
+  var message = JSON.stringify({
     type: "phan-lead-response",
     token: requestToken,
     ok: ok,
