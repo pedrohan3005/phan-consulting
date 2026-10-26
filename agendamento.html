@@ -347,27 +347,39 @@
               </p>
 </div>
 <!-- Form Content -->
-<form class="flex flex-col gap-space-md" id="lead-intake-form" onsubmit="event.preventDefault(); handleSubmit();">
+<form class="flex flex-col gap-space-md" id="lead-intake-form" method="post" target="lead-submit-frame" onsubmit="return handleSubmit(event);">
+<input name="request_token" id="lead-request-token" type="hidden" value=""/>
+<input name="page_url" id="lead-page-url" type="hidden" value=""/>
+<input name="utm_source" id="lead-utm-source" type="hidden" value=""/>
+<input name="utm_medium" id="lead-utm-medium" type="hidden" value=""/>
+<input name="utm_campaign" id="lead-utm-campaign" type="hidden" value=""/>
+<input name="utm_term" id="lead-utm-term" type="hidden" value=""/>
+<input name="utm_content" id="lead-utm-content" type="hidden" value=""/>
+<input name="gclid" id="lead-gclid" type="hidden" value=""/>
+<div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+<label for="lead-website">Website</label>
+<input autocomplete="off" id="lead-website" name="website" tabindex="-1" type="text"/>
+</div>
 <!-- Row: Nome Completo & Email Corporativo -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="flex flex-col gap-1.5">
 <label class="font-label-md text-label-md text-on-surface" for="lead-name">Nome Completo <span class="text-error">*</span></label>
-<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-name" placeholder="Ex: Rodrigo Andrade" required="" type="text"/>
+<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-name" name="name" placeholder="Ex: Rodrigo Andrade" required="" type="text"/>
 </div>
 <div class="flex flex-col gap-1.5">
 <label class="font-label-md text-label-md text-on-surface" for="lead-email">E-mail Corporativo <span class="text-error">*</span></label>
-<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-email" placeholder="nome@suaempresa.com.br" required="" type="email"/>
+<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-email" name="email" placeholder="nome@suaempresa.com.br" required="" type="email"/>
 </div>
 </div>
 <!-- Row: Telefone WhatsApp & Empresa / Cargo -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="flex flex-col gap-1.5">
 <label class="font-label-md text-label-md text-on-surface" for="lead-phone">WhatsApp com DDD <span class="text-error">*</span></label>
-<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-phone" placeholder="(11) 98765-4321" required="" type="tel"/>
+<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-phone" name="phone" placeholder="(11) 98765-4321" required="" type="tel"/>
 </div>
 <div class="flex flex-col gap-1.5">
 <label class="font-label-md text-label-md text-on-surface" for="lead-company">Empresa &amp; Seu Cargo <span class="text-error">*</span></label>
-<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-company" placeholder="Ex: TechLog • Diretor Comercial" required="" type="text"/>
+<input class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-company" name="company" placeholder="Ex: TechLog • Diretor Comercial" required="" type="text"/>
 </div>
 </div>
 <!-- Area of Focus / Pills Selector -->
@@ -406,7 +418,7 @@
 </div>
 </button>
 </div>
-<input id="selected-pillar" type="hidden" value="comercial"/>
+<input id="selected-pillar" name="interest" type="hidden" value="comercial"/>
 </div>
 <!-- Revenue / Team Calibrator (Optional) -->
 <div class="flex flex-col gap-1.5 pt-1">
@@ -414,7 +426,7 @@
 <span>Faturamento Mensal ou Porte da Equipe</span>
 <span class="font-label-caps text-label-caps text-on-surface-variant font-normal">Opcional para calibração</span>
 </label>
-<select class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)] cursor-pointer" id="lead-revenue">
+<select class="h-11 px-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm shadow-xs transition-shadow outline-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)] cursor-pointer" id="lead-revenue" name="revenue">
 <option disabled="" selected="" value="">Selecione uma faixa aproximada...</option>
 <option value="ate-100k">Até R$ 100 mil / mês (Até 5 colaboradores)</option>
 <option value="100k-500k">De R$ 100 mil a R$ 500 mil / mês (6 a 20 colaboradores)</option>
@@ -427,10 +439,16 @@
 <label class="font-label-md text-label-md text-on-surface" for="lead-challenge">
                   Qual é o principal desafio que você gostaria de resolver hoje?
                 </label>
-<textarea class="p-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none resize-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-challenge" placeholder="Ex: Nossos vendedores dependem da intuição, não temos clareza do fechamento de contas e os relatórios em planilha demoram semanas para fechar..." rows="3"></textarea>
+<textarea class="p-3.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline shadow-xs transition-shadow outline-none resize-none focus:shadow-[0_0_0_2px_rgba(70,72,212,0.35)]" id="lead-challenge" name="challenge" placeholder="Ex: Nossos vendedores dependem da intuição, não temos clareza do fechamento de contas e os relatórios em planilha demoram semanas para fechar..." rows="3"></textarea>
 </div>
 <!-- CTA Button -->
 <div class="pt-2 flex flex-col gap-space-xs">
+<label class="flex items-start gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<input class="mt-1" id="lead-consent" name="consent" required="" type="checkbox" value="true"/>
+<span>Autorizo a PHAN a usar estes dados para responder ao meu pedido e entrar em contato sobre o diagnóstico por e-mail ou WhatsApp.</span>
+</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Seus dados serão registrados em uma planilha Google privada para atendimento desta solicitação. Não informe senhas ou dados sigilosos.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs" id="form-status" role="status" aria-live="polite"></p>
 <button class="w-full h-13 py-3.5 px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-surface-variant transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 group shadow-sm" id="submit-btn" type="submit">
 <span>Agendar Diagnóstico Gratuito</span>
 <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
@@ -444,6 +462,7 @@
 </div>
 </div>
 </form>
+<iframe class="hidden" id="lead-submit-frame" name="lead-submit-frame" title="Envio seguro do formulário"></iframe>
 <!-- Success State Feedback (Hidden initially) -->
 <div class="hidden absolute inset-0 bg-surface-container-lowest rounded-xl p-space-xl flex flex-col items-center justify-center text-center" id="form-success">
 <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-secondary mb-space-sm">
@@ -510,6 +529,9 @@
 </div>
 </div>
 <script>
+  const LEAD_ENDPOINT = "COLE_A_URL_DO_WEB_APP_AQUI";
+  let activeRequestToken = "";
+
     function selectPillar(btn, value) {
       const buttons = document.querySelectorAll('.pillar-btn');
       buttons.forEach(b => {
@@ -528,18 +550,84 @@
         firstPillar.classList.remove('bg-surface-container-low');
         firstPillar.classList.add('bg-surface-container-high', 'shadow-xs');
       }
+
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('lead-page-url').value = window.location.href;
+      ['source', 'medium', 'campaign', 'term', 'content'].forEach((key) => {
+        document.getElementById(`lead-utm-${key}`).value = params.get(`utm_${key}`) || '';
+      });
+      document.getElementById('lead-gclid').value = params.get('gclid') || '';
     });
 
-    function handleSubmit() {
-      const successOverlay = document.getElementById('form-success');
-      successOverlay.classList.remove('hidden');
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      const form = document.getElementById('lead-intake-form');
+      const status = document.getElementById('form-status');
+      const submitButton = document.getElementById('submit-btn');
+
+      if (!LEAD_ENDPOINT.startsWith('https://script.google.com/macros/s/') || !LEAD_ENDPOINT.endsWith('/exec')) {
+        status.textContent = 'O recebimento ainda não foi configurado. Nenhum dado foi enviado. Tente novamente mais tarde.';
+        return false;
+      }
+
+      activeRequestToken = crypto.randomUUID();
+      document.getElementById('lead-request-token').value = activeRequestToken;
+      form.action = LEAD_ENDPOINT;
+      submitButton.disabled = true;
+      status.textContent = 'Enviando seus dados com segurança...';
+      HTMLFormElement.prototype.submit.call(form);
+      return false;
     }
+
+    window.addEventListener('message', (event) => {
+      const response = event.data;
+      if (!response || response.type !== 'phan-lead-response' || response.token !== activeRequestToken) {
+        return;
+      }
+
+      const status = document.getElementById('form-status');
+      const submitButton = document.getElementById('submit-btn');
+
+      if (response.ok) {
+        document.getElementById('form-success').classList.remove('hidden');
+        status.textContent = '';
+        return;
+      }
+
+      submitButton.disabled = false;
+      status.textContent = response.error === 'duplicate_submission'
+        ? 'Este e-mail foi enviado recentemente. Aguarde um minuto antes de tentar novamente.'
+        : 'Não foi possível registrar sua solicitação. Revise os dados e tente novamente.';
+      activeRequestToken = '';
+    });
 
     function resetForm() {
       const successOverlay = document.getElementById('form-success');
       successOverlay.classList.add('hidden');
       document.getElementById('lead-intake-form').reset();
+      document.getElementById('submit-btn').disabled = false;
+      document.getElementById('form-status').textContent = '';
+      activeRequestToken = '';
     }
   </script>
 </div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-space-xl"><div class="md:col-span-4 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-6 h-6 rounded-md bg-primary flex items-center justify-center text-on-primary font-bold text-xs">P</div><span class="font-headline-sm text-headline-sm font-bold text-on-surface">PHAN</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mt-space-xs">Assessoria e consultoria executiva em estratégia comercial, governança operacional e criação de cockpits de inteligência de dados sob medida.</p></div><div class="md:col-span-3 flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-on-surface uppercase mb-space-xs tracking-wider">Serviços</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#pilares">Assessoria Comercial &amp; Funil</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#pilares">Consultoria de Gestão e Processos</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#pilares">Dashboards em Power BI &amp; Dados</a></div><div class="md:col-span-2 flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-on-surface uppercase mb-space-xs tracking-wider">Metodologia</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#diagnostico">Diagnóstico Inicial</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#pilares">Estruturação de Dados</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#pilares">Acompanhamento Contínuo</a></div><div class="md:col-span-3 flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-on-surface uppercase mb-space-xs tracking-wider">Contato</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#diagnostico">Sessão Estratégica Gratuita</a><span class="font-body-sm text-body-sm text-on-surface-variant mt-2">São Paulo, SP — Brasil</span></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2025 PHAN Consultoria &amp; Estratégia de Negócios. Todos os direitos reservados.</p><div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacidade</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Termos de Serviço</a></div></div></div></footer>
+<script>
+  (() => {
+    const bookingUrl = 'https://pedrohan3005.github.io/-meu-site-apple/agendamento.html';
+    const bookingLink = document.querySelector('header a[href="#diagnostico"].hidden');
+    if (!bookingLink) return;
+
+    bookingLink.href = bookingUrl;
+    const roundButton = bookingLink.nextElementSibling;
+    if (roundButton && roundButton.classList.contains('rounded-full')) {
+      const roundLink = document.createElement('a');
+      roundLink.href = bookingUrl;
+      roundLink.className = roundButton.className;
+      roundLink.setAttribute('aria-label', 'Agendar Diagnóstico');
+      roundLink.title = 'Agendar Diagnóstico';
+      roundButton.replaceWith(roundLink);
+    }
+  })();
+</script>
 </body></html>
