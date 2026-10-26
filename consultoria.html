@@ -219,6 +219,18 @@
 <script>
   (() => {
     const bookingUrl = 'https://pedrohan3005.github.io/-meu-site-apple/agendamento.html';
+    const contactForm = document.querySelector('#diagnostico form');
+    if (contactForm) {
+      const bookingCta = document.createElement('a');
+      bookingCta.href = bookingUrl;
+      bookingCta.className = 'inline-flex h-12 items-center justify-center px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-surface-variant transition-colors shadow-md mb-8';
+      bookingCta.textContent = 'Agendar Diagnóstico Gratuito';
+      contactForm.replaceWith(bookingCta);
+
+      const confirmation = document.getElementById('confirmation');
+      if (confirmation) confirmation.remove();
+    }
+
     const bookingLink = document.querySelector('header a[href="#diagnostico"].hidden');
     if (!bookingLink) return;
 
